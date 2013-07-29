@@ -1,7 +1,3 @@
-<?php
-global $wp_embed, $post_ID, $post_format, $all_post_formats;
-$format_meta = get_post_format_meta( $post_ID );
-?>
 <div class="post-format-change"><span class="icon <?php echo esc_attr( $post_format ); ?>"></span> <span class="post-format-description"><?php echo $all_post_formats[$post_format]['description']; ?></span> <a href="#"><?php _e('Change format'); ?></a></div>
 <div class="post-formats-fields">
 
