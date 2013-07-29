@@ -246,11 +246,10 @@ final class Post_Formats_UI {
 	 * Add hidden post format forms after post title
 	 */
 	public static function add_format_forms() {
-		global $wp_embed;
-		$all_post_formats = self::get_all_post_formats();
-		$post_ID = self::get_post_id();
 		global $wp_embed, $post_format;
-		$format_meta = get_post_format_meta( $post_ID );
+		$all_post_formats = self::get_all_post_formats();
+		$post_ID          = self::get_post_id();
+		$format_meta      = self::get_post_format_meta( $post_ID );
 		self::template( 'post-formats', compact( 'wp_embed', 'post_ID', 'post_format', 'all_post_formats', 'format_meta' ) );
 	}
 
@@ -275,6 +274,55 @@ final class Post_Formats_UI {
 	    
 	}
 
+	/**
+	 * Retrieve post format metadata for a post
+	 *
+	 * @param int $post_id (optional) The post ID.
+	 * @return array The array of post format metadata.
+	 */
+	public static function get_post_format_meta( $post_id = 0 ) {
+		$meta = get_post_meta( $post_id );
+		$keys = array( 'quote', 'quote_source_name', 'quote_source_url', 'link_url', 'gallery', 'audio_embed', 'video_embed', 'url', 'image' );
+
+		if ( empty( $meta ) )
+			return array_fill_keys( $keys, '' );
+
+		$upgrade = array(
+			'_wp_format_quote_source' => 'quote_source_name',
+			'_wp_format_audio' => 'audio_embed',
+			'_wp_format_video' => 'video_embed'
+		);
+
+		$format = get_post_format( $post_id );
+		if ( ! empty( $format ) ) {
+			switch ( $format ) {
+			case 'link':
+				$upgrade['_wp_format_url'] = 'link_url';
+				break;
+			case 'quote':
+				$upgrade['_wp_format_url'] = 'quote_source_url';
+				break;
+			}
+		}
+
+		$upgrade_keys = array_keys( $upgrade );
+		foreach ( $meta as $key => $values ) {
+			if ( ! in_array( $key, $upgrade_keys ) )
+				continue;
+			update_post_meta( $post_id, '_format_' . $upgrade[$key], reset( $values ) );
+			delete_post_meta( $post_id, $key );
+		}
+
+		$values = array();
+
+		foreach ( $keys as $key ) {
+			$value = get_post_meta( $post_id, '_format_' . $key, true );
+			$values[$key] = empty( $value ) ? '' : $value;
+		}
+
+		return $values;
+	}
+
 	/** Plupload Helpers ******************************************************/
 
 	private static function is_wp_too_old() {
@@ -294,55 +342,3 @@ Post_Formats_UI::load();
 endif;
 
 
-
-/**
- * Retrieve post format metadata for a post
- *
- * @since 3.6.0
- *
- * @param int $post_id (optional) The post ID.
- * @return array The array of post format metadata.
- */
-function get_post_format_meta( $post_id = 0 ) {
-	$meta = get_post_meta( $post_id );
-	$keys = array( 'quote', 'quote_source_name', 'quote_source_url', 'link_url', 'gallery', 'audio_embed', 'video_embed', 'url', 'image' );
-
-	if ( empty( $meta ) )
-		return array_fill_keys( $keys, '' );
-
-	$upgrade = array(
-		'_wp_format_quote_source' => 'quote_source_name',
-		'_wp_format_audio' => 'audio_embed',
-		'_wp_format_video' => 'video_embed'
-	);
-
-	$format = get_post_format( $post_id );
-	if ( ! empty( $format ) ) {
-		switch ( $format ) {
-		case 'link':
-			$upgrade['_wp_format_url'] = 'link_url';
-			break;
-		case 'quote':
-			$upgrade['_wp_format_url'] = 'quote_source_url';
-			break;
-		}
-	}
-
-	$upgrade_keys = array_keys( $upgrade );
-	foreach ( $meta as $key => $values ) {
-		if ( ! in_array( $key, $upgrade_keys ) )
-			continue;
-		update_post_meta( $post_id, '_format_' . $upgrade[$key], reset( $values ) );
-		delete_post_meta( $post_id, $key );
-	}
-
-	$values = array();
-
-	foreach ( $keys as $key ) {
-		$value = get_post_meta( $post_id, '_format_' . $key, true );
-		$values[$key] = empty( $value ) ? '' : $value;
-	}
-
-	return $values;
-}
-?>
