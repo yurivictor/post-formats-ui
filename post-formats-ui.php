@@ -8,6 +8,7 @@
  * Author:      Yuri Victor
  * Author URI:  http://yurivictor.com
  * Credits:     Just ripped all the code from 3.6-beta1-24067
+ * License:     GPL ( attached )
  */
 
 if ( ! is_admin() && ! in_array( $pagenow, array( 'post.php', 'post-new.php' ) ) )
