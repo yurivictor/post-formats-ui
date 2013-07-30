@@ -11,10 +11,6 @@
  * License:     GPL ( attached )
  */
 
-if ( ! is_admin() && ! in_array( $pagenow, array( 'post.php', 'post-new.php' ) ) )
-	return;
-
-
 if ( ! class_exists( 'Post_Formats_UI' ) ) :
 
 final class Post_Formats_UI {
@@ -79,6 +75,9 @@ final class Post_Formats_UI {
 		wp_localize_script( 'post-formats-ui', 'postFormats', $current_post_format );
 	}
 
+	/**
+	 * Hooks into admin notices to show error
+	 */
 	private static function add_old_wp_notice() {
 		add_action( 'admin_notices', array( __CLASS__, 'show_old_wp_notice' ) );
 	}
@@ -338,7 +337,9 @@ final class Post_Formats_UI {
 
 }
 
-Post_Formats_UI::load();
+global $pagenow;
+if ( is_admin() && in_array( $pagenow, array( 'post.php', 'post-new.php' ) ) )
+	Post_Formats_UI::load();
 
 endif;
 
