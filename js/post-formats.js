@@ -28,15 +28,6 @@ var TinyMCEView = Backbone.View.extend({
 	}
 });
 
-var TinyMCEViewNew = Backbone.View.extend( {
-	mode   : Format,
-	el     : '#postdivrich',
-	render : function () {
-		this.$elshow().find( '.wp-editor-area' ).removeAttr( 'disabled' );
-		return this;
-	}
-} );
-
 var FormatView = Backbone.View.extend({
 	model: Format,
 
