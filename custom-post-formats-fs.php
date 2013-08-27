@@ -100,7 +100,6 @@ final class custom_post_formats_fs {
 	public function enqueue_cpffs( $js_to_enqueue, $all_post_formats ) {
 		global $post; 
 
-		wp_enqueue_style( 'cpffs-css', plugins_url( 'css/custom-post-formats-fs.css', __FILE__ ), null );
 		wp_localize_script( $js_to_enqueue, 'cpffs', array( 
 			'post_id' => $post->ID,
 			'fs_info' => get_post_meta( $post->ID, 'fs_info' ),
