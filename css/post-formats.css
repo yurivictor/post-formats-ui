@@ -4,13 +4,13 @@
 ------------------------------------------------------------------------------*/
 
 #poststuff .post-format-select {
-	margin-top: 0;
-	padding-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
 }
 
 .post-formats-fields {
-	display: none;
-	margin-bottom: 15px;
+    display: none;
+    margin-bottom: 15px;
 }
 
 .wp-format-gallery .post-formats-fields,
@@ -26,292 +26,292 @@
 .wp-format-quote .field.wp-format-quote,
 .wp-format-video .field.wp-format-video,
 .wp-format-audio .field.wp-format-audio {
-	display: block;
+    display: block;
 }
 
 .post-formats-fields .field {
-	display: none;
-	margin-bottom: 10px;
-	overflow: hidden;
+    display: none;
+    margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .post-formats-fields input,
 .post-formats-fields textarea {
-	padding: 5px;
-	font-size: 1.2em;
+    padding: 5px;
+    font-size: 1.2em;
 }
 
 .wp-format-image label,
 .wp-format-video label,
 .wp-format-audio label {
-	float: left;
+    float: left;
 }
 
 .wp-format-media-holder {
-	float: left;
-	overflow: hidden;
-	width: 40%;
-	height: auto;
-	padding: 55px 0 20px;
-	border: 1px dashed #dfdfdf;
-	background: #f5f5f5 url(../images/media-button-2x.png) no-repeat 50% 25%;
+    float: left;
+    overflow: hidden;
+    width: 40%;
+    height: auto;
+    padding: 55px 0 20px;
+    border: 1px dashed #dfdfdf;
+    background: #f5f5f5 url(../images/media-button-2x.png) no-repeat 50% 25%;
 }
 
 .wp-format-media-holder:hover {
-	background-color: #eee;
+    background-color: #eee;
 }
 
 .wp-format-media-preview {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .wp-format-aside #titlewrap,
 .wp-format-status #titlewrap,
 .wp-format-aside .wp-media-buttons .insert-media,
 .wp-format-status .wp-media-buttons .insert-media {
-	display: none;
+    display: none;
 }
 
 .mejs-audio audio,
 .mejs-video video {
-	display: block;
+    display: block;
 }
 
 .wp-format-media-select {
-	display: block;
-	height: 200px;
-	text-align: center;
+    display: block;
+    height: 200px;
+    text-align: center;
 }
 
 .wp-format-media-select img {
-	max-width: 100%;
-	max-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .wp-format-media-select {
-	height: 20px;
+    height: 20px;
 }
 
 .empty .wp-format-media-metaedit {
-	height: 20px;
-	display: block;
-	text-align: center;
+    height: 20px;
+    display: block;
+    text-align: center;
 }
 
 .edit-format-preview {
-	display: block;
-	margin: 5px 0;
+    display: block;
+    margin: 5px 0;
 }
 
 #wp_format_image,
 #wp_format_audio,
 #wp_format_video {
-	float: left;
-	margin-right: 23px;
-	max-width: 50%;
-	min-height: 97px;
+    float: left;
+    margin-right: 23px;
+    max-width: 50%;
+    min-height: 97px;
 }
 
 #icon-edit.wp-format-standard,
 .post-format-options .standard {
-	background: url(../images/post-formats32.png) no-repeat 0 -4px;
+    background: url(../images/post-formats32.png) no-repeat 0 -4px;
 }
 
 #icon-edit.wp-format-image,
 .post-format-options .image {
-	background: url(../images/post-formats32.png) no-repeat  -43px -4px;
+    background: url(../images/post-formats32.png) no-repeat  -43px -4px;
 }
 
 #icon-edit.wp-format-gallery,
 .post-format-options .gallery {
-	background: url(../images/post-formats32.png) no-repeat -83px -4px;
+    background: url(../images/post-formats32.png) no-repeat -83px -4px;
 }
 
 #icon-edit.wp-format-audio,
 .post-format-options .audio {
-	background: url(../images/post-formats32.png) no-repeat -123px -4px;
+    background: url(../images/post-formats32.png) no-repeat -123px -4px;
 }
 
 #icon-edit.wp-format-video,
 .post-format-options .video {
-	background: url(../images/post-formats32.png) no-repeat -163px -4px;
+    background: url(../images/post-formats32.png) no-repeat -163px -4px;
 }
 
 #icon-edit.wp-format-chat,
 .post-format-options .chat {
-	background: url(../images/post-formats32.png) no-repeat -202px -4px;
+    background: url(../images/post-formats32.png) no-repeat -202px -4px;
 }
 
 #icon-edit.wp-format-status,
 .post-format-options .status {
-	background: url(../images/post-formats32.png) no-repeat -242px -4px;
+    background: url(../images/post-formats32.png) no-repeat -242px -4px;
 }
 
 #icon-edit.wp-format-aside,
 .post-format-options .aside {
-	background: url(../images/post-formats32.png) no-repeat -282px -4px;
+    background: url(../images/post-formats32.png) no-repeat -282px -4px;
 }
 
 #icon-edit.wp-format-quote,
 .post-format-options .quote {
-	background: url(../images/post-formats32.png) no-repeat -322px -4px;
+    background: url(../images/post-formats32.png) no-repeat -322px -4px;
 }
 
 #icon-edit.wp-format-link,
 .post-format-options .link {
-	background: url(../images/post-formats32.png) no-repeat -362px -4px;
+    background: url(../images/post-formats32.png) no-repeat -362px -4px;
 }
 
 .post-format-description {
-	color: #666;
-	font-size: 12px;
+    color: #666;
+    font-size: 12px;
 }
 
 .post-format-options {
-	height: 50px;
-	margin: 13px 0 10px;
-	padding: 0;
+    height: 50px;
+    margin: 13px 0 10px;
+    padding: 0;
 }
 
 .post-format-options a {
-	display: inline-block;
-	height: 34px;
-	margin-right: 33px;
-	position: relative;
-	text-decoration: none;
-	text-align: center;
+    display: inline-block;
+    height: 34px;
+    margin-right: 33px;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
 }
 
 .post-format-options a div {
-	height: 34px;
-	width: 34px;
-	margin: 0 auto;
+    height: 34px;
+    width: 34px;
+    margin: 0 auto;
 }
 
 .post-format-title {
-	color: #777;
-	display: block;
-	margin-top: 4px;
+    color: #777;
+    display: block;
+    margin-top: 4px;
 }
 
 .post-format-change, .post-format-set .post-format-options {
-	display: none;
+    display: none;
 }
 
 .post-format-set .post-format-change {
-	display: block;
+    display: block;
 }
 
 #poststuff .post-format-change {
-	margin: 11px 0 13px;
-	padding: 0;
-	font-size: 1.5em;
-	line-height: 18px;
-	clear: left;
+    margin: 11px 0 13px;
+    padding: 0;
+    font-size: 1.5em;
+    line-height: 18px;
+    clear: left;
 }
 
 .post-format-change span.icon {
-	float: left;
-	height: 16px;
-	margin: 2px 5px 0 0;
-	width: 16px;
+    float: left;
+    height: 16px;
+    margin: 2px 5px 0 0;
+    width: 16px;
 }
 
 .post-format-change span.icon.standard {
-	background: url(../images/post-formats.png) no-repeat -8px -8px;
+    background: url(../images/post-formats.png) no-repeat -8px -8px;
 }
 
 .post-format-change span.icon.image {
-	background: url(../images/post-formats.png) no-repeat -40px -8px;
+    background: url(../images/post-formats.png) no-repeat -40px -8px;
 }
 
 .post-format-change span.icon.gallery {
-	background: url(../images/post-formats.png) no-repeat -72px -8px;
+    background: url(../images/post-formats.png) no-repeat -72px -8px;
 }
 
 .post-format-change span.icon.audio {
-	background: url(../images/post-formats.png) no-repeat -104px -8px;
+    background: url(../images/post-formats.png) no-repeat -104px -8px;
 }
 
 .post-format-change span.icon.video {
-	background: url(../images/post-formats.png) no-repeat -136px -8px;
+    background: url(../images/post-formats.png) no-repeat -136px -8px;
 }
 
 .post-format-change span.icon.chat {
-	background: url(../images/post-formats.png) no-repeat -168px -8px;
+    background: url(../images/post-formats.png) no-repeat -168px -8px;
 }
 
 .post-format-change span.icon.status {
-	background: url(../images/post-formats.png) no-repeat -200px -8px;
+    background: url(../images/post-formats.png) no-repeat -200px -8px;
 }
 
 .post-format-change span.icon.aside {
-	background: url(../images/post-formats.png) no-repeat -232px -8px;
+    background: url(../images/post-formats.png) no-repeat -232px -8px;
 }
 
 .post-format-change span.icon.quote {
-	background: url(../images/post-formats.png) no-repeat -264px -8px;
+    background: url(../images/post-formats.png) no-repeat -264px -8px;
 }
 
 .post-format-change span.icon.link {
-	background: url(../images/post-formats.png) no-repeat -296px -8px;
+    background: url(../images/post-formats.png) no-repeat -296px -8px;
 }
 
 .post-format-change a {
-	font-size: 12px;
+    font-size: 12px;
 }
 
 @media only screen and (max-width: 782px) {
-	.post-format-options {
-		height: 33px;
-	}
+    .post-format-options {
+        height: 33px;
+    }
 
-	.post-format-options a {
-		margin-right: 19px;
-	}
+    .post-format-options a {
+        margin-right: 19px;
+    }
 
-	.post-format-options a div {
-		height: 18px;
-		width: 16px;
-	}
+    .post-format-options a div {
+        height: 18px;
+        width: 16px;
+    }
 
-	.post-format-options .standard {
-		background: url(../images/post-formats.png) no-repeat -8px -8px;
-	}
+    .post-format-options .standard {
+        background: url(../images/post-formats.png) no-repeat -8px -8px;
+    }
 
-	.post-format-options .image {
-		background: url(../images/post-formats.png) no-repeat -40px -8px;
-	}
+    .post-format-options .image {
+        background: url(../images/post-formats.png) no-repeat -40px -8px;
+    }
 
-	.post-format-options .gallery {
-		background: url(../images/post-formats.png) no-repeat -72px -8px;
-	}
+    .post-format-options .gallery {
+        background: url(../images/post-formats.png) no-repeat -72px -8px;
+    }
 
-	.post-format-options .audio {
-		background: url(../images/post-formats.png) no-repeat -104px -8px;
-	}
+    .post-format-options .audio {
+        background: url(../images/post-formats.png) no-repeat -104px -8px;
+    }
 
-	.post-format-options .video {
-		background: url(../images/post-formats.png) no-repeat -136px -8px;
-	}
+    .post-format-options .video {
+        background: url(../images/post-formats.png) no-repeat -136px -8px;
+    }
 
-	.post-format-options .chat {
-		background: url(../images/post-formats.png) no-repeat -168px -8px;
-	}
+    .post-format-options .chat {
+        background: url(../images/post-formats.png) no-repeat -168px -8px;
+    }
 
-	.post-format-options .status {
-		background: url(../images/post-formats.png) no-repeat -200px -8px;
-	}
+    .post-format-options .status {
+        background: url(../images/post-formats.png) no-repeat -200px -8px;
+    }
 
-	.post-format-options .aside {
-		background: url(../images/post-formats.png) no-repeat -232px -8px;
-	}
+    .post-format-options .aside {
+        background: url(../images/post-formats.png) no-repeat -232px -8px;
+    }
 
-	.post-format-options .quote {
-		background: url(../images/post-formats.png) no-repeat -264px -8px;
-	}
+    .post-format-options .quote {
+        background: url(../images/post-formats.png) no-repeat -264px -8px;
+    }
 
-	.post-format-options .link {
-		background: url(../images/post-formats.png) no-repeat -296px -8px;
-	}
+    .post-format-options .link {
+        background: url(../images/post-formats.png) no-repeat -296px -8px;
+    }
 }

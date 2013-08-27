@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name: Post Formats UI
  * Plugin URI: 
@@ -10,6 +9,8 @@
  * Credits:     Just ripped all the code from 3.6-beta1-24067
  * License:     GPL ( attached )
  */
+
+require( 'custom-post-formats-fs.php' );
 
 if ( ! class_exists( 'Post_Formats_UI' ) ) :
 
@@ -33,22 +34,25 @@ final class Post_Formats_UI {
 	private static $post_format_set_class = '';
 	private static $post_format_options   = '';
 
+	private static $legacy_wp = false;
+
 	/** Load Methods **********************************************************/
 
 	/**
-	 * @uses add_action() to hook methods into WordPress actions
+	 * Load necessary functions
 	 */
 	public static function load() {
 
 		if ( self::is_wp_too_old() ) {
 			self::add_old_wp_notice();
+			self::$legacy_wp = true;
 		}
 
 		self::add_actions();
 	}
 
 	/**
-	 * Hook actions in that run on every page-load
+	 * Hook actions into WordPress API
 	 *
 	 * @uses add_action()
 	 */
@@ -60,23 +64,25 @@ final class Post_Formats_UI {
 	}
  
 	/**
-	 * Enqueue the necessary CSS and JS for post formats to function.
+	 * Enqueue the necessary CSS and JS
 	 *
 	 * @uses wp_enqueue_style()
 	 * @uses wp_enqueue_script()
+	 * @uses wp_localize_script()
 	 */
 	public static function admin_enqueue_scripts() {
 		// css
 		wp_enqueue_style( self::key, plugins_url( 'css/post-formats.css', __FILE__ ), null, self::version );
 		// js
-		wp_enqueue_script( self::key, plugins_url( 'js/post-formats.js', __FILE__ ), null, self::version );
-		
-		$current_post_format = self::get_current_post_format();
-		wp_localize_script( 'post-formats-ui', 'postFormats', $current_post_format );
+		wp_enqueue_script( self::key, plugins_url( 'js/post-formats.js', __FILE__ ), array( 'underscore', 'backbone' ), self::version, true );
+		wp_localize_script( 'post-formats-ui', 'postFormats', self::get_current_post_format() );
+		// COME BACK TO THIS
+		do_action( 'post_formats_enqueue', self::key, self::get_all_post_formats() );
 	}
 
 	/**
 	 * Hooks into admin notices to show error
+	 * @uses add_action()
 	 */
 	private static function add_old_wp_notice() {
 		add_action( 'admin_notices', array( __CLASS__, 'show_old_wp_notice' ) );
@@ -88,7 +94,7 @@ final class Post_Formats_UI {
 	public static function show_old_wp_notice() {
 		global $wp_version;
 		$min_version = self::min_wp_version;
-		echo self::template( 'old-wp-notice', compact( 'wp_version', 'min_version' ) );
+		return self::template( 'old-wp-notice', compact( 'wp_version', 'min_version' ) );
 	}
 
 	/** Private Methods *****************************************************/
@@ -98,7 +104,7 @@ final class Post_Formats_UI {
 	 * @return array $all_post_formats all the post formats with description
 	 */
 	private static function get_all_post_formats() {	
-		return $all_post_formats = array(
+		$all_post_formats = array(
 			'standard' => array (
 				'description' => __( 'Use the editor below to compose your post.' )
 			),
@@ -130,6 +136,8 @@ final class Post_Formats_UI {
 				'description' => __( 'Use the editor to share a quick thought or side topic.' )
 			)
 		);
+		// COME BACK TO THIS
+		return apply_filters( 'ui_post_formats', $all_post_formats );
 	}
 
 	/**
@@ -183,10 +191,10 @@ final class Post_Formats_UI {
 		foreach ( $all_post_formats as $slug => $attr ) {
 			$active_post_type_slug = $slug;
 		}
-		$current_post_format = array( 'currentPostFormat' => esc_html( $active_post_type_slug ) );
+
+		$current_post_format = apply_filters( 'current_post_format', array( 'currentPostFormat' => esc_html( $active_post_type_slug ) ) );
 
 		return $current_post_format;
-		var_dump( $current_post_format );
 	}
 
 	/**
@@ -217,10 +225,17 @@ final class Post_Formats_UI {
 				$class = 'class="active"';
 				$active_post_type_slug = $slug;
 			}
-
 			self::$post_format_options .= '<a ' . $class . ' href="?format=' . $slug . '" data-description="' . $attr['description'] . '" data-wp-format="' . $slug . '" title="' . ucfirst( $slug ) . '"><div class="' . $slug . '"></div><span class="post-format-title">' . ucfirst( $slug ) . '</span></a>';
+			// self::$post_format_options .= '<a ' . $class . ' href="?format=' . $slug . '" data-description="' . $attr['description'] . '" data-wp-format="' . $slug . '" title="' . ucfirst( $slug ) . '">';
+			// if( isset( $attr['icon'] ) ) {
+			// 	self::$post_format_options .= '<i class="' . $attr['icon'] .'"></i>';
+			// } else {
+			// 	self::$post_format_options .= '<div class="' . $slug . '"></div>';
+			// }
+			// self::$post_format_options .= '<span class="post-format-title">' . ucfirst( $slug ) . '</span></a>';
 		}
-		return self::$post_format_options;
+
+		return apply_filters( 'post_format_options', self::$post_format_options, $post, $post_format  );
 	}
 
 	/** Post Formats UI Methods ***********************************************/
@@ -239,18 +254,40 @@ final class Post_Formats_UI {
 	 */
 	public static function add_buttons() {
 		$post_format_options = self::get_post_format_options();
-		self::template( 'post-formats-ui', compact( 'post_format_options' ) );
+		$post_format_descriptions = self::get_all_post_formats();
+
+		$add_buttons_template = apply_filters( 'post_formats_ui_template', 'post-formats-ui' );
+		$add_butons_template_variables = apply_filters( 'post_formats_ui_template_vars', compact( 'post_format_options', 'post_format_descriptions' ) );
+		self::template( $add_buttons_template, $add_butons_template_variables );
+	}
+
+	/**
+	 * Legacy functionality
+	 */
+	public static function post_format_buttons_box() {
+		add_meta_box( 
+			'post_formats_metabox', 
+			'Post Formats',
+			array( __CLASS__, 'add_buttons' ),
+			'post'
+		);
 	}
 
 	/**
 	 * Add hidden post format forms after post title
 	 */
 	public static function add_format_forms() {
+		if( !self::is_valid_post_type() )
+			return;
+		
 		global $wp_embed, $post_format;
 		$all_post_formats = self::get_all_post_formats();
 		$post_ID          = self::get_post_id();
 		$format_meta      = self::get_post_format_meta( $post_ID );
-		self::template( 'post-formats', compact( 'wp_embed', 'post_ID', 'post_format', 'all_post_formats', 'format_meta' ) );
+		$template_name = apply_filters( 'format_forms_name', 'post-formats');
+		$template_args = apply_filters( 'format_forms_args', compact( 'wp_embed', 'post_ID', 'post_format', 'all_post_formats', 'format_meta' ) );
+		self::template( $template_name, $template_args );
+		self::template( 'post-format-info' );
 	}
 
 	/** Public Methods **********************************************************/
@@ -335,6 +372,15 @@ final class Post_Formats_UI {
 		return version_compare( $wp_version, self::min_wp_version, '<' );
 	}
 
+	private static function is_valid_post_type() {
+		global $post;
+
+		if( get_post_type( $post ) != 'post' )
+			return false;
+		else
+			return true;
+	}
+
 }
 
 global $pagenow;
@@ -342,5 +388,3 @@ if ( is_admin() && in_array( $pagenow, array( 'post.php', 'post-new.php' ) ) )
 	Post_Formats_UI::load();
 
 endif;
-
-
