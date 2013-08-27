@@ -376,7 +376,7 @@ final class Post_Formats_UI {
 		if ( ! isset( $wp_version ) || ! $wp_version )
 			return false;
 
-		return version_compare( $wp_version, self::min_wp, '<=' );
+		return version_compare( $wp_version, self::min_wp, '<' );
 	}
 
 	private static function is_valid_post_type() {
