@@ -15,9 +15,10 @@ final class Post_Formats_UI {
 	/** Constants *************************************************************/
 
 	const version          = '0.0.1';
-	const min_wp_version   = '3.7';
+	const min_wp           = '3.7';
 	const key              = 'post-formats-ui';
 	const url_endpoint     = 'post-formats-ui';
+	const prefix           = 'post_formats_ui_';
 	const nonce_key        = 'post_formats_ui_nonce';
 
 	/** Variables *************************************************************/
@@ -95,7 +96,7 @@ final class Post_Formats_UI {
 	 */
 	public static function show_old_wp_notice() {
 		global $wp_version;
-		$min_version = self::min_wp_version;
+		$min_version = self::min_wp;
 		return self::template( 'old-wp-notice', compact( 'wp_version', 'min_version' ) );
 	}
 
@@ -364,14 +365,18 @@ final class Post_Formats_UI {
 
 	/** Plupload Helpers ******************************************************/
 
+	/**
+	 * Verifies WordPress version meets the necessary minimum
+	 * @return unknown
+	 */
 	private static function is_wp_too_old() {
 		global $wp_version;
 		// if WordPress is loaded in a function the version variables aren't globalized
 		// see: http://core.trac.wordpress.org/ticket/17749#comment:40
-		if ( !isset( $wp_version ) || !$wp_version ) {
+		if ( ! isset( $wp_version ) || ! $wp_version )
 			return false;
-		}
-		return version_compare( $wp_version, self::min_wp_version, '<' );
+
+		return version_compare( $wp_version, self::min_wp, '<=' );
 	}
 
 	private static function is_valid_post_type() {
