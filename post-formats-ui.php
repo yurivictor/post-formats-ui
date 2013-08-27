@@ -1,16 +1,12 @@
 <?php
 /**
- * Plugin Name: Post Formats UI
- * Plugin URI: 
- * Description: The post formats UI pulled from 3.6
- * Version:     0.0.1
- * Author:      Yuri Victor
- * Author URI:  http://yurivictor.com
- * Credits:     Just ripped all the code from 3.6-beta1-24067
- * License:     GPL ( attached )
+ * Plugin Name:  Post Formats UI
+ * Description:  The post formats UI pulled from 3.6
+ * Version:      0.0.1
+ * Authors:      Yuri Victor, Connor Jennings
+ * Credits:      Ripped a lot of the code from 3.6-beta1-24067
+ * License:      GPL ( attached )
  */
-
-require( 'custom-post-formats-fs.php' );
 
 if ( ! class_exists( 'Post_Formats_UI' ) ) :
 
@@ -42,12 +38,11 @@ final class Post_Formats_UI {
 	 * Load necessary functions
 	 */
 	public static function load() {
-
 		if ( self::is_wp_too_old() ) {
 			self::add_old_wp_notice();
 			self::$legacy_wp = true;
 		}
-
+		self::includes();
 		self::add_actions();
 	}
 
@@ -78,6 +73,13 @@ final class Post_Formats_UI {
 		wp_localize_script( 'post-formats-ui', 'postFormats', self::get_current_post_format() );
 		// COME BACK TO THIS
 		do_action( 'post_formats_enqueue', self::key, self::get_all_post_formats() );
+	}
+
+	/**
+	 * Include the necessary files
+	 */
+	private function includes() {
+		require( dirname( __FILE__ ) . '/classes/class-custom-formats.php' );
 	}
 
 	/**
