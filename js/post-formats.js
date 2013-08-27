@@ -57,6 +57,8 @@ var FormatView = Backbone.View.extend({
 				$(this).addClass('cpffs-hidden');
 		});
 
+		// Allows calls to Add Media
+		// ripped from WP 3.6
 		$(function(){
 
 			var mediaFrame;
@@ -161,9 +163,7 @@ var FormatView = Backbone.View.extend({
 
 				mediaFrame.open();
 			});
-		});		
-
-		// $('#postdivrich').hide().find('.wp-editor-area').attr('disabled', 'disabled');
+		});
 	}
 });
 
