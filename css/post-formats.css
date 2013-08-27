@@ -331,10 +331,10 @@
 }
 
 .field .block { display: block; clear: both; }
-input.widefat, 
-textarea.widefat,
-.wp-format-media-holder { margin: 5px auto 10px auto; }
-textarea.widefat { float: left; margin-right: 23px; max-width: 50%;
+#post-format-ui input.widefat, 
+#post-format-ui textarea.widefat,
+#post-format-ui .wp-format-media-holder { margin: 5px auto 10px auto; }
+#post-format-ui textarea.widefat { float: left; margin-right: 23px; max-width: 50%;
 min-height: 97px; }
 
 .field { margin-bottom: 10px; }
