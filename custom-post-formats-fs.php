@@ -194,12 +194,15 @@ final class custom_post_formats_fs {
 
 	public function get_post_format_strings_fs() {
 		$strings = array(
-			'episodes' 			=> 'Episodes',
-			'highlights' 		=> 'Highlights',
-			'articles'			=> 'Articles',
-			'graphics'			=> 'Graphics',
-			'polls'				=> 'Polls',
-			'social-media'		=> 'Social Media'
+			'standard' => 'Standard',
+			'image'    => 'Images',
+			'gallery'  => 'Galleries',
+			'video'    => 'Videos',
+			'audio'    => 'Audio',
+			'chat'     => 'Chats',
+			'status'   => 'Statuses',
+			'quote'    => 'Quotes',
+			'aside'    => 'Asides',
 		);
 
 		return apply_filters( 'add_post_format_cpffs', $strings );
@@ -207,12 +210,15 @@ final class custom_post_formats_fs {
 
 	public function get_post_format_strings_singular_fs() {
 		$strings = array(
-			'episodes' 			=> 'Episode',
-			'highlights' 		=> 'Highlight',
-			'articles'			=> 'Article',
-			'graphics'			=> 'Graphic',
-			'polls'				=> 'Poll',
-			'social-media'		=> 'Social Media'
+			'standard' => 'Standard',
+			'image'    => 'Image',
+			'gallery'  => 'Gallery',
+			'video'    => 'Video',
+			'audio'    => 'Audio',
+			'chat'     => 'Chat',
+			'status'   => 'Status',
+			'quote'    => 'Quote',
+			'aside'    => 'Aside',
 		);
 
 		return $strings;
