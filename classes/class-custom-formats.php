@@ -43,7 +43,7 @@ final class custom_post_formats_fs {
 
 		$post_format_meta = get_post_meta( $post->ID, 'fs_info', true );
 
-		$array_of_vars['format_type'] = $post_format_meta['fs_type'];
+		$array_of_vars['format_type'] = isset( $post_format_meta['fs_type'] ) ? $post_format_meta['fs_type'] : 'standard';
 		
 		return $array_of_vars;
 	}
@@ -79,6 +79,7 @@ final class custom_post_formats_fs {
 		);
 
 		update_post_meta( $post_id, 'fs_info', $fs_info );
+
 	}
 
 	public function update_post_format_fs() {

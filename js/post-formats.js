@@ -204,16 +204,21 @@ var FormatViews = Backbone.View.extend({
 
 	initialize: function() {
 		var t = this;
+		var fs_type = 'standard';
 		this.subviews = {};
 
-		if( !cpffs.fs_info[0].fs_type ) {
+		if ( typeof cpffs.fs_info[0] !== 'undefined' ) {
+			fs_type = cpffs.fs_info[0].fs_type;
+		}	
+
+		if( ! fs_type ) {
 			this.timeoutID = setTimeout(
 				function(){
 					t.changePostFormat();
 				}, 10000
 			);
 		} else {
-			this.changePostFormat(null, cpffs.fs_info[0].fs_type );
+			this.changePostFormat(null, fs_type );
 		}
 	},
 
