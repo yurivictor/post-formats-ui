@@ -100,7 +100,6 @@ final class Post_Formats_UI {
 		$min_version = self::min_wp;
 		return self::template( 'old-wp-notice', compact( 'wp_version', 'min_version' ) );
 	}
-
 	/** Post Formats UI Methods ***********************************************/
 
 	/**
@@ -113,7 +112,32 @@ final class Post_Formats_UI {
 
 	/** Plupload Helpers ******************************************************/
 
-	/** 
+	/**
+	 * Gets the post id
+	 * @return int $post_id the id of the post
+	 */
+	public static function get_post_id() {
+		if ( isset( $_GET['post'] ) )
+			$post_id = $post_ID = (int) $_GET['post'];
+		elseif ( isset( $_POST['post_ID'] ) )
+			$post_id = $post_ID = (int) $_POST['post_ID'];
+		else
+			$post_id = $post_ID = 0;
+		return $post_id;
+	}	
+
+	/**
+	 * Gets post based on id
+	 * @uses get_post()
+	 * @return array $post the post being edited
+	 */
+	public static function get_post_by_id() {
+		$post_id = self::get_post_id();
+		$post = get_post( $post_id );
+		return $post;
+	}
+
+	/**
 	 * Load a template. MVC FTW!
 	 * @param string $template the template to load, without extension (assumes .php). File should be in templates/ folder
 	 * @param args array of args to be run through extract and passed to template
@@ -192,32 +216,6 @@ final class Post_Formats_UI {
 		);
 		// COME BACK TO THIS
 		return apply_filters( 'ui_post_formats', $all_post_formats );
-	}
-
-	/**
-	 * Gets the post id
-	 * @return int $post_id the id of the post
-	 */
-	public static function get_post_id() {
-		if ( isset( $_GET['post'] ) )
-		 	$post_id = $post_ID = (int) $_GET['post'];
-		elseif ( isset( $_POST['post_ID'] ) )
-		 	$post_id = $post_ID = (int) $_POST['post_ID'];
-		else
-		 	$post_id = $post_ID = 0;
-		return $post_id;
-	}	
-
-	/**
-	 * Gets post based on id
-	 *
-	 * @uses get_post()
-	 * @return array $post the post being edited
-	 */
-	public static function get_post_by_id() {
-		$post_id = self::get_post_id();
-		$post = get_post( $post_id );
-		return $post;
 	}
 
 	/**
