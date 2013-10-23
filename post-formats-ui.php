@@ -60,7 +60,7 @@ final class Post_Formats_UI {
 
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 		add_action( 'init', array( __CLASS__, 'register_custom_post_formats_fs' ) );
-		add_action( 'post_formats_enqueue', array( __CLASS__, 'enqueue_cpffs' ), 10, 3 );
+		add_action( 'post_formats_enqueue', array( __CLASS__, 'post_formats_enqueue' ), 10, 3 );
 		add_action( 'save_post', array( __CLASS__, 'save_custom_post_format_data' ) );		
 	}
 
@@ -173,7 +173,7 @@ final class Post_Formats_UI {
 	 */
 	public static function add_old_wp_notice() {
 		add_action( 'admin_notices', array( __CLASS__, 'show_old_wp_notice' ) );
-	}		
+	}
 
 	/** Need to clean up ******************************************************/
 
@@ -378,7 +378,7 @@ final class Post_Formats_UI {
 		) );
 	}
 
-	public static function enqueue_cpffs( $js_to_enqueue, $all_post_formats ) {
+	public static function post_formats_enqueue( $js_to_enqueue, $all_post_formats ) {
 		global $post; 
 
 		wp_localize_script( $js_to_enqueue, 'cpffs', array( 
