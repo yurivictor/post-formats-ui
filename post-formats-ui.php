@@ -133,7 +133,7 @@ final class Post_Formats_UI {
 	 * Verifies WordPress version meets the necessary minimum
 	 * @return unknown
 	 */
-	private static function is_wp_too_old() {
+	public static function is_wp_too_old() {
 		global $wp_version;
 		// if WordPress is loaded in a function the version variables aren't globalized
 		// see: http://core.trac.wordpress.org/ticket/17749#comment:40
@@ -142,6 +142,14 @@ final class Post_Formats_UI {
 
 		return version_compare( $wp_version, self::min_wp, '<' );
 	}
+
+	/**
+	 * Hooks into admin notices to show error
+	 * @uses add_action()
+	 */
+	public static function add_old_wp_notice() {
+		add_action( 'admin_notices', array( __CLASS__, 'show_old_wp_notice' ) );
+	}		
 
 	/** Need to clean up ******************************************************/
 
@@ -479,14 +487,6 @@ final class Post_Formats_UI {
 
 		return wp_set_post_terms( $post->ID, $format, 'post_format_cpft' );
 	}
-
-	/**
-	 * Hooks into admin notices to show error
-	 * @uses add_action()
-	 */
-	private static function add_old_wp_notice() {
-		add_action( 'admin_notices', array( __CLASS__, 'show_old_wp_notice' ) );
-	}	
 
 }
 
