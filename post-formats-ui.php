@@ -233,7 +233,6 @@ final class Post_Formats_UI {
 
 	/**
 	 * Gets current post format
-	 *
 	 * @uses get_post_format
 	 * @return array $current_post_format an array of the current post's format
 	 */
